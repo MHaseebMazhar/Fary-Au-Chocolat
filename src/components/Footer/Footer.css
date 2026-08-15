@@ -104,6 +104,22 @@
   .footer-inner {
     grid-template-columns: 1fr;
   }
+
+  @media (max-width: 480px) {
+    .socials .icon {
+      width: 40px;
+      height: 40px;
+    }
+    .subscribe {
+      flex-direction: column;
+    }
+    .subscribe input {
+      width: 100%;
+    }
+    .subscribe-btn {
+      width: 100%;
+    }
+  }
   .footer-legal {
     flex-direction: column;
     gap: 8px;

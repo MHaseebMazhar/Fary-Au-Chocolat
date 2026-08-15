@@ -35,7 +35,7 @@ export default function Footer() {
           <div className="col-title">Explore</div>
           <a href="#top">Menu</a>
           <a href="#top">Offers</a>
-          <a href="#top">Gift Hampers</a>
+          <a href="#top">About</a>
         </div>
 
         <div className="footer-col">

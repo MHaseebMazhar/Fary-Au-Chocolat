@@ -302,6 +302,64 @@
   }
 }
 
+/* tighter tablet/mobile adjustments */
+@media (max-width: 700px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+  .hero-right img {
+    height: 180px;
+  }
+  .hero-ctas {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .hero-ctas .primary,
+  .hero-ctas .ghost {
+    width: 100%;
+  }
+  .hero-search input {
+    width: 100%;
+  }
+  .products {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+  .hero {
+    padding: 14px;
+  }
+  .hero-right img {
+    height: 150px;
+  }
+  .brand,
+  .restaurant-header h1 {
+    font-size: 1.05rem;
+  }
+  .premium-cart .cart-item {
+    gap: 8px;
+  }
+  .cart-thumb img {
+    width: 56px;
+    height: 56px;
+  }
+  .cart-promo input {
+    min-width: 120px;
+  }
+  .premium-actions {
+    flex-direction: column;
+  }
+  .premium-actions .buy,
+  .premium-actions .checkout {
+    width: 100%;
+  }
+}
+
 /* Modal for quick-add */
 .modal-backdrop {
   position: fixed;
