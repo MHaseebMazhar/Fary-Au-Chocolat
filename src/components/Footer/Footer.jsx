@@ -19,15 +19,27 @@ export default function Footer() {
             Handcrafted chocolates & artisanal sweets
           </div>
           <div className="socials">
-            <a href="#top" aria-label="Instagram" className="icon">
+            <a
+              href="https://www.instagram.com/faryauchocolat/?hl=en"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram"
+              className="icon"
+            >
               📷
             </a>
-            <a href="#top" aria-label="Facebook" className="icon">
-              👍
+            <a
+              href="https://wa.me/923135505548"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="WhatsApp"
+              className="icon"
+            >
+              💬
             </a>
-            <a href="#top" aria-label="Twitter" className="icon">
-              🐦
-            </a>
+          </div>
+          <div style={{ marginTop: 8 }} className="contact-number">
+            <a href="tel:+923135505548">0313-5505548</a>
           </div>
         </div>
 

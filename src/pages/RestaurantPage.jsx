@@ -153,11 +153,6 @@ export default function RestaurantPage() {
   }
 
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-
-  function handleBuyNow() {
-    setShowForm(true);
-  }
-
   function submitOrder(e) {
     e.preventDefault();
     alert(
@@ -197,21 +192,7 @@ export default function RestaurantPage() {
     } catch (e) {}
   }
 
-  function copyOrder() {
-    if (cart.length === 0) return alert("Cart is empty");
-    const lines = cart.map(
-      (i) => `${i.qty} x ${i.name} = PKR ${i.qty * i.price}`,
-    );
-    const txt = `Order summary:\n${lines.join("\n")}\nTotal: PKR ${total}`;
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard
-        .writeText(txt)
-        .then(() => alert("Order copied to clipboard"))
-        .catch(() => alert(txt));
-    } else {
-      alert(txt);
-    }
-  }
+  
 
   function openQuickAdd(p) {
     setSelectedProduct(p);
@@ -493,18 +474,14 @@ export default function RestaurantPage() {
                   </div>
 
                   <div className="cart-actions premium-actions">
-                    <button className="buy" onClick={handleBuyNow}>
-                      Buy Now
-                    </button>
+                  
                     <button
                       className="checkout"
                       onClick={() => alert("Proceed to checkout (static)")}
                     >
                       Checkout
                     </button>
-                    <button className="checkout" onClick={copyOrder}>
-                      Copy Order
-                    </button>
+                  
                     <button className="checkout" onClick={clearCart}>
                       Clear Cart
                     </button>
