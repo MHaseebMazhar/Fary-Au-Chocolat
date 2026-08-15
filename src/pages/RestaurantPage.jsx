@@ -12,8 +12,7 @@ const PRODUCTS = [
     price: 1200,
     desc: "Assorted gourmet truffles",
     category: "Chocolates",
-    image:
-      "https://images.unsplash.com/photo-1604147706287-1b9f9b2d8f2a?auto=format&fit=crop&w=800&q=80",
+    image: "/jacob-boavista-B6kBrzkl3YQ-unsplash.jpg",
   },
   {
     id: 2,
@@ -21,8 +20,7 @@ const PRODUCTS = [
     price: 350,
     desc: "70% cacao single origin",
     category: "Chocolates",
-    image:
-      "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
+    image: "/jacob-boavista-B6kBrzkl3YQ-unsplash.jpg",
   },
   {
     id: 3,
@@ -30,8 +28,7 @@ const PRODUCTS = [
     price: 450,
     desc: "Rich drinking chocolate mix",
     category: "Drinks",
-    image:
-      "https://images.unsplash.com/photo-1516685018646-549d6a2a7b3b?auto=format&fit=crop&w=800&q=80",
+    image: "/jacob-boavista-B6kBrzkl3YQ-unsplash.jpg",
   },
   {
     id: 4,
@@ -39,8 +36,7 @@ const PRODUCTS = [
     price: 280,
     desc: "Smooth milk chocolate with caramel notes",
     category: "Chocolates",
-    image:
-      "https://images.unsplash.com/photo-1541745537411-7e5a6b6da8a1?auto=format&fit=crop&w=800&q=80",
+    image: "/jacob-boavista-B6kBrzkl3YQ-unsplash.jpg",
   },
   {
     id: 5,
@@ -48,8 +44,7 @@ const PRODUCTS = [
     price: 650,
     desc: "Decadent layered chocolate cake (single slice)",
     category: "Desserts",
-    image:
-      "https://images.unsplash.com/photo-1542827638-7f20c8f3e9c8?auto=format&fit=crop&w=800&q=80",
+    image: "/jacob-boavista-B6kBrzkl3YQ-unsplash.jpg",
   },
   {
     id: 6,
@@ -57,8 +52,7 @@ const PRODUCTS = [
     price: 900,
     desc: "Colorful assorted macarons",
     category: "Desserts",
-    image:
-      "https://images.unsplash.com/photo-1543872084-c7bd3822856f?auto=format&fit=crop&w=800&q=80",
+    image: "/jacob-boavista-B6kBrzkl3YQ-unsplash.jpg",
   },
   {
     id: 7,
@@ -66,8 +60,7 @@ const PRODUCTS = [
     price: 550,
     desc: "Fresh strawberries dipped in dark chocolate",
     category: "Desserts",
-    image:
-      "https://images.unsplash.com/photo-1505577058444-a3dab0ea5f6b?auto=format&fit=crop&w=800&q=80",
+    image: "/jacob-boavista-B6kBrzkl3YQ-unsplash.jpg",
   },
   {
     id: 8,
@@ -75,8 +68,7 @@ const PRODUCTS = [
     price: 750,
     desc: "Creamy hazelnut spread for toast and desserts",
     category: "Chocolates",
-    image:
-      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
+    image: "/jacob-boavista-B6kBrzkl3YQ-unsplash.jpg",
   },
   {
     id: 9,
@@ -84,8 +76,7 @@ const PRODUCTS = [
     price: 320,
     desc: "Fudgy brownie with chocolate chips",
     category: "Bakery",
-    image:
-      "https://images.unsplash.com/photo-1589308078050-7c0b6c6b8b9d?auto=format&fit=crop&w=800&q=80",
+    image: "/jacob-boavista-B6kBrzkl3YQ-unsplash.jpg",
   },
   {
     id: 10,
@@ -93,8 +84,7 @@ const PRODUCTS = [
     price: 380,
     desc: "Chilled chocolate drink topped with whipped cream",
     category: "Drinks",
-    image:
-      "https://images.unsplash.com/photo-1544025162-0c6f5e7a7b2a?auto=format&fit=crop&w=800&q=80",
+    image: "/jacob-boavista-B6kBrzkl3YQ-unsplash.jpg",
   },
   {
     id: 11,
@@ -102,8 +92,7 @@ const PRODUCTS = [
     price: 2200,
     desc: "Selection of chocolates and sweets, gift-wrapped",
     category: "Gifts",
-    image:
-      "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=800&q=80",
+    image: "/jacob-boavista-B6kBrzkl3YQ-unsplash.jpg",
   },
   {
     id: 12,
@@ -111,8 +100,7 @@ const PRODUCTS = [
     price: 200,
     desc: "Single shot of rich espresso",
     category: "Drinks",
-    image:
-      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80",
+    image: "/jacob-boavista-B6kBrzkl3YQ-unsplash.jpg",
   },
 ];
 
@@ -191,8 +179,6 @@ export default function RestaurantPage() {
       localStorage.removeItem("cart");
     } catch (e) {}
   }
-
-  
 
   function openQuickAdd(p) {
     setSelectedProduct(p);
@@ -287,7 +273,7 @@ export default function RestaurantPage() {
               onError={(e) => {
                 e.currentTarget.onerror = null;
                 e.currentTarget.src =
-                  "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80";
+                  "/jacob-boavista-B6kBrzkl3YQ-unsplash.jpg";
               }}
             />
           </div>
@@ -474,14 +460,13 @@ export default function RestaurantPage() {
                   </div>
 
                   <div className="cart-actions premium-actions">
-                  
                     <button
                       className="checkout"
                       onClick={() => alert("Proceed to checkout (static)")}
                     >
                       Checkout
                     </button>
-                  
+
                     <button className="checkout" onClick={clearCart}>
                       Clear Cart
                     </button>
