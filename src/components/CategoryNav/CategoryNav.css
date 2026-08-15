@@ -1,0 +1,18 @@
+.category-nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+.category-nav button {
+  background: transparent;
+  border: 1px solid #ddd;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.category-nav button.active {
+  background: #8b3a3a;
+  color: #fff;
+  border-color: #8b3a3a;
+}

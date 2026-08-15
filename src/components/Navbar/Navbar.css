@@ -1,0 +1,149 @@
+.navbar {
+  background: var(--card);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  padding: 14px 0;
+}
+.navbar-inner {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+.brand {
+  font-weight: 800;
+  color: var(--primary);
+  font-size: 1.05rem;
+}
+.tag {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.location .loc-btn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.navbar-center {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex: 1;
+}
+.search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+.search-input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.02);
+}
+.search-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.nav-links {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.nav-links a {
+  color: #444;
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.nav-links a:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.lang {
+  border: 1px solid var(--border);
+  padding: 8px;
+  border-radius: 8px;
+  background: transparent;
+}
+.btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.btn.ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.btn.primary {
+  background: var(--primary);
+  color: #fff;
+}
+.cart-btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  border-radius: 10px;
+  position: relative;
+}
+.cart-btn .badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 50%;
+  padding: 4px 7px;
+  font-size: 0.75rem;
+}
+
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+  .search-input {
+    display: block;
+  }
+  .navbar-inner {
+    gap: 8px;
+  }
+  .brand {
+    font-size: 1rem;
+  }
+}

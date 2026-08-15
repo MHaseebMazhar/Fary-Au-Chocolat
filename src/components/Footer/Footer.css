@@ -1,0 +1,112 @@
+.component-footer {
+  padding: 28px 20px;
+  background: linear-gradient(180deg, #faf7f6 0%, #fff 100%);
+  color: #4b4b4b;
+  font-size: 0.95rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 320px;
+  gap: 24px;
+  align-items: start;
+}
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.brand-col .brand {
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--primary);
+}
+.tagline {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.socials {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+.socials .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  text-decoration: none;
+}
+.col-title {
+  font-weight: 700;
+  color: #222;
+}
+.footer-col a {
+  color: #555;
+  text-decoration: none;
+  padding: 6px 0;
+  border-radius: 6px;
+}
+.footer-col a:hover {
+  color: var(--primary);
+}
+.newsletter-col .muted {
+  color: #666;
+}
+.subscribe {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+.subscribe input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+.subscribe-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.subscribe-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(179, 63, 63, 0.12);
+}
+
+.footer-legal {
+  margin-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  padding-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.legal-links a {
+  margin-left: 12px;
+  color: #666;
+  text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+  .footer-legal {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+}
