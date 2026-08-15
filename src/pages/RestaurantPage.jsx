@@ -301,8 +301,13 @@ export default function RestaurantPage() {
 
           <div className="hero-right">
             <img
-              src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80"
-              alt="Chocolate display"
+              src="/hero.jpg"
+              alt="Hero"
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src =
+                  "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80";
+              }}
             />
           </div>
         </div>

@@ -9,7 +9,6 @@ export default function Navbar({
   logoSrc = "/logo.jpg",
 }) {
   const [q, setQ] = useState("");
-  const [location, setLocation] = useState("Select address");
   const [lang, setLang] = useState("EN");
   const [imgError, setImgError] = useState(false);
 
@@ -48,17 +47,6 @@ export default function Navbar({
             </div>
           </div>
 
-          <div className="location">
-            <button
-              className="loc-btn"
-              onClick={() => {
-                const val = prompt("Enter address (demo)", location);
-                if (val !== null) setLocation(val);
-              }}
-            >
-              📍 {location}
-            </button>
-          </div>
         </div>
 
         <div className="navbar-center">
@@ -97,15 +85,7 @@ export default function Navbar({
             <option>EN</option>
             <option>UR</option>
           </select>
-          <button className="btn ghost" onClick={() => alert("Login (demo)")}>
-            Log in
-          </button>
-          <button
-            className="btn primary"
-            onClick={() => alert("Sign up (demo)")}
-          >
-            Sign up
-          </button>
+         
 
           <button
             className="cart-btn"
