@@ -447,7 +447,8 @@ export default function RestaurantPage() {
                   <div className="cart-actions premium-actions">
                     <button
                       className="checkout"
-                      onClick={() => alert("Proceed to checkout (static)")}
+                      onClick={() => cart.length > 0 && setShowForm(true)}
+                      disabled={cart.length === 0}
                     >
                       Checkout
                     </button>
