@@ -42,7 +42,9 @@ export default function CheckoutPage() {
     e.preventDefault();
 
     if (!fullName.trim()) return alert("Please enter your full name.");
-    if (!mobile.trim()) return alert("Please enter your mobile number.");
+    if (!/^3\d{9}$/.test(mobile)) {
+      return alert("Please enter a valid 10-digit Pakistani mobile number.");
+    }
     if (!address.trim()) return alert("Please add a delivery address.");
 
     const orderId = `ORD-${Date.now().toString().slice(-6)}`;
@@ -136,20 +138,26 @@ export default function CheckoutPage() {
                       value={countryCode}
                       onChange={(e) => setCountryCode(e.target.value)}
                     >
-                      <option value="+92">🇵🇰 +92</option>
-                      <option value="+1">🇺🇸 +1</option>
-                      <option value="+44">🇬🇧 +44</option>
-                      <option value="+971">🇦🇪 +971</option>
+                      <option value="+92">+92</option>
+            
                     </select>
                     <input
                       type="tel"
-                      placeholder="3XX-XXXXXXX"
+                      placeholder="3XXXXXXXXX"
                       value={mobile}
-                      onChange={(e) => setMobile(e.target.value)}
+                      maxLength={10}
+                      pattern="[0-9]{10}"
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, "");
+
+                        if (value.length <= 10) {
+                          setMobile(value);
+                        }
+                      }}
                       required
                     />
                   </div>
-                  <small>Example: +92 3XX-XXXXXXX</small>
+                  <small>Example: +92 3001234567</small>
                 </label>
 
                 <label className="field">

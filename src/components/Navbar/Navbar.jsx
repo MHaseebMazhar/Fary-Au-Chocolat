@@ -1,5 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./Navbar.css";
+
+const MENU_CATEGORIES = [
+  "Kunafa Cups",
+  "Chocolate Cups",
+  "Frappuccino",
+  "Mojito",
+  "Iced Tea",
+  "Slow Bar",
+  "Hot Latte",
+  "Iced Latte",
+  "Coffee",
+  "Matcha",
+  "Beverages",
+];
 
 export default function Navbar({
   brand = "Fary Au Chocolat",
@@ -9,6 +24,34 @@ export default function Navbar({
 }) {
   const [lang, setLang] = useState("EN");
   const [imgError, setImgError] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  function scrollToSection(id) {
+    setMenuOpen(false);
+    if (location.pathname === "/") {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      navigate("/");
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 300);
+    }
+  }
 
   return (
     <header className="navbar premium">
@@ -48,8 +91,41 @@ export default function Navbar({
 
         <div className="navbar-center">
           <nav className="nav-links">
-            <a href="#menu">Menu</a>
-            <a href="#about">About</a>
+            <div className="menu-dropdown-wrap" ref={menuRef}>
+              <button
+                type="button"
+                className={`menu-trigger ${menuOpen ? "open" : ""}`}
+                onClick={() => setMenuOpen((v) => !v)}
+                aria-expanded={menuOpen}
+              >
+                Menu
+                <span className="menu-caret">▾</span>
+              </button>
+
+              {menuOpen && (
+                <div className="menu-dropdown">
+                  {MENU_CATEGORIES.map((cat) => (
+                    <button
+                      key={cat}
+                      type="button"
+                      className="menu-dropdown-item"
+                      onClick={() => scrollToSection(`category-${cat}`)}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                  <button
+                    type="button"
+                    className="menu-dropdown-item view-all"
+                    onClick={() => scrollToSection("menu-start")}
+                  >
+                    View Full Menu →
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <Link to="/about">About</Link>
           </nav>
         </div>
 
