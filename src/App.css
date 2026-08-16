@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background: var(--bg);
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -14,7 +16,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -25,7 +27,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: var(--gold);
 }
 
 @keyframes App-logo-spin {

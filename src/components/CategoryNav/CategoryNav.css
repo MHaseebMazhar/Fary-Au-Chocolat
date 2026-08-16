@@ -2,17 +2,27 @@
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  margin: 8px 0;
+  margin: 12px 0;
 }
 .category-nav button {
   background: transparent;
-  border: 1px solid #ddd;
-  padding: 6px 10px;
-  border-radius: 6px;
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  border-radius: 8px;
   cursor: pointer;
+  color: var(--text);
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
+
+.category-nav button:hover {
+  border-color: var(--primary);
+  background: var(--light-bg);
+}
+
 .category-nav button.active {
-  background: #8b3a3a;
+  background: var(--primary);
   color: #fff;
-  border-color: #8b3a3a;
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(139, 111, 71, 0.2);
 }

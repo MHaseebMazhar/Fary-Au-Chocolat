@@ -4,6 +4,7 @@ import ProductCard from "../components/ProductCard/ProductCard";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
 import CategoryNav from "../components/CategoryNav/CategoryNav";
+import LocationModal from "../components/LocationModal/LocationModal";
 
 const PRODUCTS = [
   {
@@ -116,6 +117,8 @@ export default function RestaurantPage() {
   const [order, setOrder] = useState({ name: "", phone: "", address: "" });
   const [category, setCategory] = useState("All");
   const [search, setSearch] = useState("");
+  const [showLocationModal, setShowLocationModal] = useState(true);
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
   function addToCart(p) {
     setCart((prev) => {
@@ -197,8 +200,15 @@ export default function RestaurantPage() {
     setSelectedProduct(null);
   }
 
+  function handleLocationSelect(selection) {
+    setDeliveryMode(selection.orderType);
+    setSelectedLocation(selection.location);
+    setShowLocationModal(false);
+  }
+
   return (
     <div>
+      {showLocationModal && <LocationModal onSelect={handleLocationSelect} />}
       <Navbar cartCount={cartCount} onCartClick={scrollToCart} />
 
       <div className="container">

@@ -6,16 +6,16 @@
 
 .hero {
   background: linear-gradient(
-    90deg,
-    rgba(179, 63, 63, 0.06),
-    rgba(139, 58, 58, 0.03)
+    135deg,
+    rgba(139, 111, 71, 0.08),
+    rgba(212, 175, 55, 0.04)
   );
-  padding: 22px;
-  border-radius: 12px;
-  margin-bottom: 18px;
+  padding: 32px;
+  border-radius: 16px;
+  margin-bottom: 24px;
   display: grid;
   grid-template-columns: 1fr 380px;
-  gap: 20px;
+  gap: 32px;
   align-items: center;
 }
 
@@ -234,12 +234,19 @@
   gap: 8px;
 }
 .cart-actions .buy {
-  background: #b33f3f;
+  background: var(--primary);
   color: #fff;
   border: none;
   padding: 10px 14px;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.cart-actions .buy:hover {
+  background: var(--accent);
+  box-shadow: 0 4px 12px rgba(139, 111, 71, 0.2);
 }
 .cart-actions .checkout {
   background: transparent;
@@ -274,12 +281,19 @@
   margin-top: 8px;
 }
 .place {
-  background: #28a745;
+  background: var(--primary);
   color: #fff;
   border: none;
   padding: 10px 14px;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.place:hover {
+  background: var(--accent);
+  box-shadow: 0 4px 12px rgba(139, 111, 71, 0.2);
 }
 .empty {
   color: #777;
@@ -409,15 +423,18 @@
   align-items: center;
 }
 .chip {
-  background: rgba(0, 0, 0, 0.04);
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 0.9rem;
+  background: var(--light-bg);
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
   color: var(--text);
+  border: 1px solid var(--border);
+  font-weight: 500;
 }
 .chip.open {
-  background: linear-gradient(90deg, var(--primary), var(--accent));
+  background: linear-gradient(135deg, var(--primary), var(--accent));
   color: #fff;
+  border: none;
 }
 .rating strong {
   margin-left: 6px;
