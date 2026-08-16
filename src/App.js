@@ -15,6 +15,7 @@ function App() {
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/admin/*" element={<AdminApp />} />
+        
       </Routes>
     </BrowserRouter>
   );
