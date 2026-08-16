@@ -223,3 +223,149 @@
     margin-bottom: 20px;
   }
 }
+.location-modal {
+  background: white;
+  border-radius: 20px;
+  padding: 38px 26px 24px;
+  max-width: 430px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s ease-out;
+}
+
+.modal-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.modal-logo {
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  color: #b79a68;
+  font-family: Arial, sans-serif;
+}
+
+.section-label {
+  display: block;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.order-type-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.order-btn {
+  flex: 0 0 auto;
+  min-width: 95px;
+  padding: 10px 18px;
+  border: none;
+  background: #f1f1f1;
+  border-radius: 22px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.order-btn.active {
+  background: #b49a68;
+  color: white;
+  border: none;
+  box-shadow: none;
+}
+
+.current-location {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 15px auto 20px;
+  padding: 9px 15px;
+  width: fit-content;
+  background: #f5f5f7;
+  border: 1px solid #e5e5e5;
+  border-radius: 22px;
+}
+
+.current-location input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  accent-color: #333;
+}
+
+.current-location label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #333;
+}
+
+.location-select-group {
+  margin-bottom: 12px;
+}
+
+.dropdown-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 7px;
+}
+
+.location-dropdown {
+  width: 100%;
+  box-sizing: border-box;
+  height: 38px;
+  padding: 0 14px;
+  border: 1px solid #d5d5d5;
+  border-radius: 20px;
+  font-size: 13px;
+  color: #333;
+  background: white;
+  cursor: pointer;
+  outline: none;
+}
+
+.location-dropdown:focus {
+  border-color: #b49a68;
+}
+
+.location-dropdown:disabled {
+  color: #333;
+  background: white;
+  opacity: 1;
+  cursor: default;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 38px;
+  padding: 0;
+  background: #b49a68;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: 0.2s;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #9d8558;
+}
+
+.submit-btn:disabled {
+  background: #c8c8c8;
+  cursor: not-allowed;
+}

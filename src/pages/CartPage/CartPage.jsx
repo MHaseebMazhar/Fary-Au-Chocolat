@@ -87,9 +87,20 @@ export default function CartPage() {
   const submitOrder = (e) => {
     e.preventDefault();
 
-    alert(
-      `Order placed!\n\nName: ${order.name}\nPhone: ${order.phone}\nAddress: ${order.address}\n\nTotal: PKR ${grandTotal}`,
-    );
+    const orderId = `ORD-${Date.now().toString().slice(-6)}`;
+
+    navigate("/order-confirmation", {
+      state: {
+        orderId,
+        customer: { ...order },
+        items: cart,
+        subtotal,
+        delivery,
+        tax,
+        discount,
+        grandTotal,
+      },
+    });
 
     setCart([]);
     setShowForm(false);
