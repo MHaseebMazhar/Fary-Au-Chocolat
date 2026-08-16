@@ -112,7 +112,6 @@ export default function RestaurantPage() {
   const [cart, setCart] = useState([]);
   const [promo, setPromo] = useState("");
   const [appliedPromo, setAppliedPromo] = useState(null);
-  const [tip, setTip] = useState(0);
   const [showForm, setShowForm] = useState(false);
   const [order, setOrder] = useState({ name: "", phone: "", address: "" });
   const [category, setCategory] = useState("All");
@@ -425,29 +424,6 @@ export default function RestaurantPage() {
                       <div>Tax</div>
                       <div>PKR {Math.round(total * 0.13)}</div>
                     </div>
-                    <div className="estimate-row tip-row">
-                      <div>Tip</div>
-                      <div className="tip-buttons">
-                        <button
-                          onClick={() => setTip(0)}
-                          className={tip === 0 ? "active" : ""}
-                        >
-                          No tip
-                        </button>
-                        <button
-                          onClick={() => setTip(50)}
-                          className={tip === 50 ? "active" : ""}
-                        >
-                          PKR 50
-                        </button>
-                        <button
-                          onClick={() => setTip(100)}
-                          className={tip === 100 ? "active" : ""}
-                        >
-                          PKR 100
-                        </button>
-                      </div>
-                    </div>
 
                     {appliedPromo && (
                       <div className="estimate-row">
@@ -462,8 +438,7 @@ export default function RestaurantPage() {
                         PKR{" "}
                         {total +
                           (total > 1500 ? 0 : 120) +
-                          Math.round(total * 0.13) +
-                          tip -
+                          Math.round(total * 0.13) -
                           (appliedPromo ? appliedPromo.amount : 0)}
                       </div>
                     </div>
