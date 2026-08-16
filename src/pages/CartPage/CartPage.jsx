@@ -9,13 +9,6 @@ export default function CartPage() {
   const [promo, setPromo] = useState("");
   const [appliedPromo, setAppliedPromo] = useState(null);
 
-  const [showForm, setShowForm] = useState(false);
-
-  const [order, setOrder] = useState({
-    name: "",
-    phone: "",
-    address: "",
-  });
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
 
@@ -25,8 +18,8 @@ export default function CartPage() {
   }, []);
 
   const updateQty = (id, delta) => {
-    setCart((prev) =>
-      prev
+    setCart((prev) => {
+      const next = prev
         .map((item) =>
           item.id === id
             ? {
@@ -35,12 +28,18 @@ export default function CartPage() {
               }
             : item,
         )
-        .filter((item) => item.qty > 0),
-    );
+        .filter((item) => item.qty > 0);
+      localStorage.setItem("cart", JSON.stringify(next));
+      return next;
+    });
   };
 
   const removeItem = (id) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+    setCart((prev) => {
+      const next = prev.filter((item) => item.id !== id);
+      localStorage.setItem("cart", JSON.stringify(next));
+      return next;
+    });
   };
 
   const clearCart = () => {
@@ -82,38 +81,6 @@ export default function CartPage() {
       setAppliedPromo(null);
       alert("Invalid promo code");
     }
-  };
-
-  const submitOrder = (e) => {
-    e.preventDefault();
-
-    const orderId = `ORD-${Date.now().toString().slice(-6)}`;
-
-    navigate("/order-confirmation", {
-      state: {
-        orderId,
-        customer: { ...order },
-        items: cart,
-        subtotal,
-        delivery,
-        tax,
-        discount,
-        grandTotal,
-      },
-    });
-
-    setCart([]);
-    setShowForm(false);
-    setAppliedPromo(null);
-    setPromo("");
-
-    setOrder({
-      name: "",
-      phone: "",
-      address: "",
-    });
-
-    localStorage.removeItem("cart");
   };
 
   return (
@@ -270,7 +237,7 @@ export default function CartPage() {
 
                 <button
                   className="checkout-btn"
-                  onClick={() => setShowForm(true)}
+                  onClick={() => navigate("/checkout")}
                 >
                   Proceed to Checkout
                 </button>
@@ -282,71 +249,6 @@ export default function CartPage() {
                   ← Continue Shopping
                 </button>
               </div>
-
-              {showForm && (
-                <form className="delivery-form" onSubmit={submitOrder}>
-                  <h2>Delivery Details</h2>
-
-                  <label>
-                    Full Name
-                    <input
-                      type="text"
-                      value={order.name}
-                      onChange={(e) =>
-                        setOrder({
-                          ...order,
-                          name: e.target.value,
-                        })
-                      }
-                      required
-                    />
-                  </label>
-
-                  <label>
-                    Phone Number
-                    <input
-                      type="tel"
-                      value={order.phone}
-                      onChange={(e) =>
-                        setOrder({
-                          ...order,
-                          phone: e.target.value,
-                        })
-                      }
-                      required
-                    />
-                  </label>
-
-                  <label>
-                    Delivery Address
-                    <textarea
-                      rows="4"
-                      value={order.address}
-                      onChange={(e) =>
-                        setOrder({
-                          ...order,
-                          address: e.target.value,
-                        })
-                      }
-                      required
-                    />
-                  </label>
-
-                  <div className="form-buttons">
-                    <button type="submit" className="place-order-btn">
-                      Place Order
-                    </button>
-
-                    <button
-                      type="button"
-                      className="cancel-btn"
-                      onClick={() => setShowForm(false)}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-              )}
             </aside>
           </div>
         )}
