@@ -46,31 +46,11 @@ export default function Navbar({
               <div className="tag">Gourmet chocolates</div>
             </div>
           </div>
-
         </div>
 
         <div className="navbar-center">
-          <div className="search-wrap">
-            <input
-              className="search-input"
-              placeholder="Search in menu or items..."
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && onSearch && onSearch(q)}
-              aria-label="Search in menu"
-            />
-            <button
-              className="search-btn"
-              onClick={() => onSearch && onSearch(q)}
-              aria-label="Search"
-            >
-              🔍
-            </button>
-          </div>
-
           <nav className="nav-links">
             <a href="#menu">Menu</a>
-            <a href="#offers">Offers</a>
             <a href="#about">About</a>
           </nav>
         </div>
@@ -85,7 +65,6 @@ export default function Navbar({
             <option>EN</option>
             <option>UR</option>
           </select>
-         
 
           <button
             className="cart-btn"
