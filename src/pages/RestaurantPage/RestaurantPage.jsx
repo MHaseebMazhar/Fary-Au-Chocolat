@@ -96,7 +96,6 @@ const PRODUCTS = [
     price: 1399,
     desc: "Delicious mixture of fresh banana fruit with drizzled pistachio paste, rich chocolate and crispy kunafa creating a perfect blend of textures and flavors",
     category: "Kunafa Cups",
-    image: "/be903b62-b03d-4b2f-aab6-a019238267a8.webp",
   },
   {
     id: 3,
