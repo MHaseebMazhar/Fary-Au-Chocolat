@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./RestaurantPage.css";
-import ProductCard from "../components/ProductCard/ProductCard";
-import Footer from "../components/Footer/Footer";
-import Navbar from "../components/Navbar/Navbar";
-import CategoryNav from "../components/CategoryNav/CategoryNav";
-import LocationModal from "../components/LocationModal/LocationModal";
 
+import ProductCard from "../../components/ProductCard/ProductCard";
+import Footer from "../../components/Footer/Footer";
+import Navbar from "../../components/Navbar/Navbar";
+import CategoryNav from "../../components/CategoryNav/CategoryNav";
+import LocationModal from "../../components/LocationModal/LocationModal";
 const PRODUCTS = [
   // Kunafa Cups
   {
@@ -406,98 +407,96 @@ const PRODUCTS = [
   },
 ];
 
-const MENU_CATEGORIES = Array.from(new Set(PRODUCTS.map((p) => p.category)));
+const MENU_CATEGORIES = Array.from(
+  new Set(PRODUCTS.map((product) => product.category)),
+);
 
 export default function RestaurantPage() {
+  const navigate = useNavigate();
+
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedQty, setSelectedQty] = useState(1);
-  const [cart, setCart] = useState([]);
-  const [promo, setPromo] = useState("");
-  const [appliedPromo, setAppliedPromo] = useState(null);
-  const [showForm, setShowForm] = useState(false);
-  const [order, setOrder] = useState({ name: "", phone: "", address: "" });
-  const [category, setCategory] = useState("All");
-  const [search, setSearch] = useState("");
-  const [showLocationModal, setShowLocationModal] = useState(true);
 
-  function addToCart(p) {
-    setCart((prev) => {
-      const found = prev.find((i) => i.id === p.id);
-      if (found)
-        return prev.map((i) => (i.id === p.id ? { ...i, qty: i.qty + 1 } : i));
-      return [...prev, { ...p, qty: 1 }];
-    });
-  }
-
-  function updateQty(id, delta) {
-    setCart((prev) =>
-      prev
-        .map((i) =>
-          i.id === id ? { ...i, qty: Math.max(1, i.qty + delta) } : i,
-        )
-        .filter((i) => i.qty > 0),
-    );
-  }
-
-  function removeItem(id) {
-    setCart((prev) => prev.filter((i) => i.id !== id));
-  }
-
-  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  function submitOrder(e) {
-    e.preventDefault();
-    alert(
-      `Order placed!\nName: ${order.name}\nPhone: ${order.phone}\nAddress: ${order.address}\nTotal: PKR ${total}`,
-    );
-    setCart([]);
-    setShowForm(false);
-    setOrder({ name: "", phone: "", address: "" });
-  }
-
-  // load cart from localStorage
-  useEffect(() => {
+  const [cart, setCart] = useState(() => {
     try {
-      const raw = localStorage.getItem("cart");
-      if (raw) setCart(JSON.parse(raw));
-    } catch (e) {}
-  }, []);
+      const savedCart = localStorage.getItem("cart");
 
-  // persist cart
+      if (!savedCart) {
+        return [];
+      }
+
+      const parsedCart = JSON.parse(savedCart);
+
+      return Array.isArray(parsedCart) ? parsedCart : [];
+    } catch (error) {
+      console.error("Unable to load cart:", error);
+      return [];
+    }
+  });
+
   useEffect(() => {
     try {
       localStorage.setItem("cart", JSON.stringify(cart));
-    } catch (e) {}
+    } catch (error) {
+      console.error("Unable to save cart:", error);
+    }
   }, [cart]);
-
-  const cartCount = cart.reduce((s, i) => s + (i.qty || 0), 0);
-
-  function scrollToCart() {
-    const el = document.querySelector(".cart-panel");
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  function clearCart() {
-    setCart([]);
-    try {
-      localStorage.removeItem("cart");
-    } catch (e) {}
-  }
-
-  function openQuickAdd(p) {
-    setSelectedProduct(p);
-    setSelectedQty(1);
-  }
-
-  function addToCartWithQty(p, qty) {
+  const [category, setCategory] = useState("All");
+  const [search, setSearch] = useState("");
+  const [showLocationModal, setShowLocationModal] = useState(true);
+  function addToCart(product) {
     setCart((prev) => {
-      const found = prev.find((i) => i.id === p.id);
-      if (found)
-        return prev.map((i) =>
-          i.id === p.id ? { ...i, qty: i.qty + qty } : i,
+      const found = prev.find((item) => item.id === product.id);
+
+      if (found) {
+        return prev.map((item) =>
+          item.id === product.id
+            ? {
+                ...item,
+                qty: item.qty + 1,
+              }
+            : item,
         );
-      return [...prev, { ...p, qty }];
+      }
+
+      return [
+        ...prev,
+        {
+          ...product,
+          qty: 1,
+        },
+      ];
     });
+  }
+  function addToCartWithQty(product, qty) {
+    setCart((prev) => {
+      const found = prev.find((item) => item.id === product.id);
+
+      if (found) {
+        return prev.map((item) =>
+          item.id === product.id
+            ? {
+                ...item,
+                qty: item.qty + qty,
+              }
+            : item,
+        );
+      }
+
+      return [
+        ...prev,
+        {
+          ...product,
+          qty,
+        },
+      ];
+    });
+
     setSelectedProduct(null);
+  }
+  function openQuickAdd(product) {
+    setSelectedProduct(product);
+    setSelectedQty(1);
   }
 
   function handleLocationSelect(selection) {
@@ -506,23 +505,40 @@ export default function RestaurantPage() {
 
   function handleCategorySelect(cat) {
     setCategory(cat);
+
     const targetId = cat === "All" ? "menu-start" : `category-${cat}`;
-    const el = document.getElementById(targetId);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    const element = document.getElementById(targetId);
+
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
   }
 
+ function handleCartClick() {
+  navigate("/cart");
+}
   return (
     <div>
       {showLocationModal && <LocationModal onSelect={handleLocationSelect} />}
-      <Navbar cartCount={cartCount} onCartClick={scrollToCart} />
+
+      <Navbar
+        cartCount={cart.reduce((sum, item) => sum + (item.qty || 0), 0)}
+        onCartClick={handleCartClick}
+      />
 
       <div className="container">
+        {/* HERO */}
         <div className="hero">
           <div className="hero-left">
             <h1>Fary Au Chocolat</h1>
+
             <p className="lead">
-              Handcrafted chocolates & desserts. Fresh daily — order for
-              delivery or pickup.
+              Handcrafted chocolates & desserts. Fresh daily order for delivery
+              or pickup.
             </p>
 
             <div className="hero-meta">
@@ -542,7 +558,7 @@ export default function RestaurantPage() {
           <div className="hero-right">
             <img
               src="/hero.jpg"
-              alt="Hero"
+              alt="Fary Au Chocolat"
               onError={(e) => {
                 e.currentTarget.onerror = null;
                 e.currentTarget.src =
@@ -551,245 +567,86 @@ export default function RestaurantPage() {
             />
           </div>
         </div>
+
+        {/* MENU */}
         <main className="restaurant-root">
-          <aside className="menu">
+          <section className="menu">
             <div className="restaurant-header">
               <h1>Fary Au Chocolat</h1>
               <p>Gourmet chocolates & desserts</p>
             </div>
 
-            <div>
-              <CategoryNav
-                categories={["All", ...MENU_CATEGORIES]}
-                selected={category}
-                onSelect={handleCategorySelect}
+            <CategoryNav
+              categories={["All", ...MENU_CATEGORIES]}
+              selected={category}
+              onSelect={handleCategorySelect}
+            />
+
+            <div style={{ marginBottom: 12 }}>
+              <input
+                placeholder="Search products..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                style={{
+                  padding: 10,
+                  width: "100%",
+                  borderRadius: 8,
+                  border: "1px solid #ddd",
+                  boxSizing: "border-box",
+                }}
               />
-
-              <div style={{ marginBottom: 12 }}>
-                <input
-                  placeholder="Search products..."
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  style={{
-                    padding: 8,
-                    width: "100%",
-                    borderRadius: 6,
-                    border: "1px solid #ddd",
-                  }}
-                />
-              </div>
-
-              <div id="menu-start" className="menu-sections">
-                {MENU_CATEGORIES.map((cat) => {
-                  const items = PRODUCTS.filter(
-                    (p) =>
-                      p.category === cat &&
-                      (p.name.toLowerCase().includes(search.toLowerCase()) ||
-                        p.desc.toLowerCase().includes(search.toLowerCase())),
-                  );
-                  if (items.length === 0) return null;
-                  return (
-                    <section
-                      key={cat}
-                      id={`category-${cat}`}
-                      className="menu-section"
-                    >
-                      <div className="menu-section-header">
-                        <h2 className="menu-section-title">{cat}</h2>
-                        <span className="menu-section-count">
-                          {items.length}
-                        </span>
-                      </div>
-                      <div className="products">
-                        {items.map((p) => (
-                          <ProductCard
-                            key={p.id}
-                            product={p}
-                            onAdd={() => addToCart(p)}
-                            onQuickOpen={openQuickAdd}
-                          />
-                        ))}
-                      </div>
-                    </section>
-                  );
-                })}
-              </div>
             </div>
-          </aside>
 
-          <section className="cart-panel">
-            <h2>Cart</h2>
-            <div className="cart-box">
-              {cart.length === 0 ? (
-                <div className="cart-empty">
-                  <p className="empty">Your cart is empty</p>
-                  <small className="muted">
-                    Add items from the menu to start your order.
-                  </small>
-                </div>
-              ) : (
-                <div className="cart-list premium-cart">
-                  {cart.map((i) => (
-                    <div key={i.id} className="cart-item">
-                      <div className="cart-thumb">
-                        <img src={i.image} alt={i.name} />
-                      </div>
-                      <div className="cart-item-main">
-                        <div className="cart-line">
-                          <strong className="item-name">{i.name}</strong>
-                          <div className="item-price">
-                            PKR {i.price * i.qty}
-                          </div>
-                        </div>
-                        <div className="cart-controls">
-                          <button
-                            onClick={() => updateQty(i.id, -1)}
-                            aria-label="Decrease"
-                          >
-                            -
-                          </button>
-                          <span className="qty">{i.qty}</span>
-                          <button
-                            onClick={() => updateQty(i.id, 1)}
-                            aria-label="Increase"
-                          >
-                            +
-                          </button>
-                          <button
-                            className="remove"
-                            onClick={() => removeItem(i.id)}
-                          >
-                            Remove
-                          </button>
-                        </div>
-                        <div className="muted small">{i.desc}</div>
-                      </div>
-                    </div>
-                  ))}
+            <div id="menu-start" className="menu-sections">
+              {MENU_CATEGORIES.map((cat) => {
+                const items = PRODUCTS.filter(
+                  (product) =>
+                    product.category === cat &&
+                    (product.name
+                      .toLowerCase()
+                      .includes(search.toLowerCase()) ||
+                      product.desc
+                        .toLowerCase()
+                        .includes(search.toLowerCase())),
+                );
 
-                  <div className="cart-promo">
-                    <input
-                      placeholder="Promo code"
-                      value={promo}
-                      onChange={(e) => setPromo(e.target.value)}
-                    />
-                    <button
-                      onClick={() => {
-                        if (!promo) return alert("Enter promo code (demo)");
-                        const code = promo.trim().toUpperCase();
-                        if (code === "FARY10") {
-                          setAppliedPromo({
-                            code,
-                            amount: Math.round(total * 0.1),
-                          });
-                          alert("Promo applied: 10% off");
-                        } else {
-                          alert("Invalid promo (demo)");
-                        }
-                      }}
-                    >
-                      Apply
-                    </button>
-                  </div>
+                if (items.length === 0) {
+                  return null;
+                }
 
-                  <div className="cart-estimate">
-                    <div className="estimate-row">
-                      <div>Subtotal</div>
-                      <div>PKR {total}</div>
-                    </div>
-                    <div className="estimate-row">
-                      <div>Delivery</div>
-                      <div>PKR {total > 1500 ? 0 : 120}</div>
-                    </div>
-                    <div className="estimate-row">
-                      <div>Tax</div>
-                      <div>PKR {Math.round(total * 0.13)}</div>
+                return (
+                  <section
+                    key={cat}
+                    id={`category-${cat}`}
+                    className="menu-section"
+                  >
+                    <div className="menu-section-header">
+                      <h2 className="menu-section-title">{cat}</h2>
+
+                      <span className="menu-section-count">{items.length}</span>
                     </div>
 
-                    {appliedPromo && (
-                      <div className="estimate-row">
-                        <div>Promo ({appliedPromo.code})</div>
-                        <div>-PKR {appliedPromo.amount}</div>
-                      </div>
-                    )}
-
-                    <div className="cart-summary total-row">
-                      <div>Total</div>
-                      <div className="total-amount">
-                        PKR{" "}
-                        {total +
-                          (total > 1500 ? 0 : 120) +
-                          Math.round(total * 0.13) -
-                          (appliedPromo ? appliedPromo.amount : 0)}
-                      </div>
+                    <div className="products">
+                      {items.map((product) => (
+                        <ProductCard
+                          key={product.id}
+                          product={product}
+                          onAdd={() => addToCart(product)}
+                          onQuickOpen={openQuickAdd}
+                        />
+                      ))}
                     </div>
-                  </div>
-
-                  <div className="cart-actions premium-actions">
-                    <button
-                      className="checkout"
-                      onClick={() => cart.length > 0 && setShowForm(true)}
-                      disabled={cart.length === 0}
-                    >
-                      Checkout
-                    </button>
-
-                    <button className="checkout" onClick={clearCart}>
-                      Clear Cart
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {showForm && (
-                <form className="order-form" onSubmit={submitOrder}>
-                  <h3>Delivery Details</h3>
-                  <label>
-                    Name
-                    <input
-                      value={order.name}
-                      onChange={(e) =>
-                        setOrder({ ...order, name: e.target.value })
-                      }
-                      required
-                    />
-                  </label>
-                  <label>
-                    Phone
-                    <input
-                      value={order.phone}
-                      onChange={(e) =>
-                        setOrder({ ...order, phone: e.target.value })
-                      }
-                      required
-                    />
-                  </label>
-                  <label>
-                    Address
-                    <textarea
-                      value={order.address}
-                      onChange={(e) =>
-                        setOrder({ ...order, address: e.target.value })
-                      }
-                      required
-                    />
-                  </label>
-                  <div className="form-actions">
-                    <button type="submit" className="place">
-                      Place Order
-                    </button>
-                    <button type="button" onClick={() => setShowForm(false)}>
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-              )}
+                  </section>
+                );
+              })}
             </div>
           </section>
         </main>
       </div>
 
       <Footer />
+
+      {/* PRODUCT QUICK ADD MODAL */}
       {selectedProduct && (
         <div
           className="modal-backdrop"
@@ -799,21 +656,28 @@ export default function RestaurantPage() {
             <div className="modal-left">
               <img src={selectedProduct.image} alt={selectedProduct.name} />
             </div>
+
             <div className="modal-right">
               <h3>{selectedProduct.name}</h3>
+
               <p className="desc">{selectedProduct.desc}</p>
+
               <div className="modal-price">PKR {selectedProduct.price}</div>
+
               <div className="qty-control">
                 <button
                   onClick={() => setSelectedQty(Math.max(1, selectedQty - 1))}
                 >
                   -
                 </button>
+
                 <span>{selectedQty}</span>
+
                 <button onClick={() => setSelectedQty(selectedQty + 1)}>
                   +
                 </button>
               </div>
+
               <div style={{ marginTop: 12 }}>
                 <button
                   className="primary"
@@ -821,6 +685,7 @@ export default function RestaurantPage() {
                 >
                   Add {selectedQty} to cart
                 </button>
+
                 <button
                   style={{ marginLeft: 8 }}
                   onClick={() => setSelectedProduct(null)}

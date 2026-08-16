@@ -1,0 +1,717 @@
+
+/* =========================
+   GLOBAL
+========================= */
+
+:root {
+  --primary: #8b6f47;
+  --accent: #6f5434;
+  --text: #222;
+  --muted: #777;
+  --border: #e8e3dd;
+  --card: #ffffff;
+  --background: #faf8f5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  background: var(--background);
+  color: var(--text);
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 18px 20px 60px;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px 28px;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.site-brand {
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.4px;
+  color: #222;
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.site-nav a {
+  color: #444;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.site-nav a:hover {
+  color: var(--primary);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(139, 111, 71, 0.11),
+      rgba(212, 175, 55, 0.04)
+    );
+
+  padding: 35px;
+  border-radius: 18px;
+  margin-bottom: 30px;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 390px;
+  gap: 35px;
+
+  align-items: center;
+}
+
+.hero-left {
+  min-width: 0;
+}
+
+.hero-left h1 {
+  margin: 0 0 12px;
+  font-size: 42px;
+  line-height: 1.15;
+  font-weight: 800;
+  color: #241c14;
+}
+
+.hero-left .lead {
+  max-width: 620px;
+  margin: 0;
+  color: #666;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.hero-meta {
+  margin-top: 24px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 15px;
+}
+
+.rating strong {
+  color: #222;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 7px 12px;
+
+  border-radius: 20px;
+
+  background: #fff;
+  border: 1px solid #e8e1d8;
+
+  color: #555;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.chip.open {
+  color: #39723d;
+  background: #eff8ef;
+  border-color: #d7ebd7;
+}
+
+.hero-right {
+  width: 100%;
+  height: 270px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.hero-right img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* =========================
+   RESTAURANT ROOT
+========================= */
+
+.restaurant-root {
+  display: block;
+  padding: 10px 0 50px;
+}
+
+.menu {
+  width: 100%;
+}
+
+.restaurant-header {
+  margin-bottom: 18px;
+}
+
+.restaurant-header h1 {
+  margin: 0 0 5px;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.restaurant-header p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* =========================
+   CATEGORY NAV
+========================= */
+
+.category-nav {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 5px 0 14px;
+  margin-bottom: 10px;
+
+  scrollbar-width: thin;
+}
+
+.category-nav::-webkit-scrollbar {
+  height: 4px;
+}
+
+.category-nav::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 10px;
+}
+
+.category-nav button {
+  flex: 0 0 auto;
+
+  border: 1px solid #ddd;
+  background: #fff;
+
+  padding: 9px 15px;
+  border-radius: 20px;
+
+  color: #555;
+  font-size: 13px;
+  font-weight: 600;
+
+  transition: all 0.2s ease;
+}
+
+.category-nav button:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.category-nav button.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-box {
+  margin: 10px 0 25px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 13px 15px;
+
+  border: 1px solid #ddd;
+  border-radius: 10px;
+
+  background: #fff;
+
+  outline: none;
+  font-size: 14px;
+
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-box input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(139, 111, 71, 0.08);
+}
+
+/* =========================
+   MENU SECTIONS
+========================= */
+
+.menu-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.menu-section {
+  padding-top: 25px;
+  scroll-margin-top: 90px;
+}
+
+.menu-section + .menu-section {
+  border-top: 1px solid var(--border);
+  margin-top: 15px;
+}
+
+.menu-section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  margin-bottom: 5px;
+}
+
+.menu-section-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.menu-section-count {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* =========================
+   PRODUCT GRID
+========================= */
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 15px;
+}
+
+/*
+  ProductCard component styling
+*/
+
+.products .product-card {
+  background: var(--card);
+  border: 1px solid #eee8e1;
+  border-radius: 14px;
+  overflow: hidden;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.products .product-card:hover {
+  transform: translateY(-3px);
+  border-color: #ddd0c0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+}
+
+/* =========================
+   PRODUCT CARD FALLBACK STYLES
+========================= */
+
+.product-card img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.product-card-content {
+  padding: 15px;
+}
+
+.product-card h3 {
+  margin: 0 0 7px;
+  font-size: 17px;
+}
+
+.product-card p {
+  margin: 0 0 10px;
+  color: #777;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.product-card .price {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.product-card button {
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.product-card button:hover {
+  background: var(--accent);
+}
+
+/* =========================
+   QUICK ADD MODAL
+========================= */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.55);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  z-index: 1000;
+}
+
+.product-modal {
+  width: min(760px, 100%);
+
+  background: #fff;
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+
+  animation: modalOpen 0.2s ease;
+}
+
+@keyframes modalOpen {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-left {
+  min-height: 360px;
+}
+
+.modal-left img {
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+.modal-right {
+  padding: 32px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal-right h3 {
+  margin: 0 0 12px;
+
+  font-size: 26px;
+  line-height: 1.2;
+}
+
+.modal-right .desc {
+  margin: 0 0 18px;
+
+  color: #777;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.modal-price {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary);
+
+  margin-bottom: 20px;
+}
+
+/* =========================
+   QUANTITY CONTROL
+========================= */
+
+.qty-control {
+  display: inline-flex;
+  align-items: center;
+
+  width: fit-content;
+
+  border: 1px solid #ddd;
+  border-radius: 9px;
+
+  overflow: hidden;
+}
+
+.qty-control button {
+  width: 38px;
+  height: 38px;
+
+  border: none;
+  background: #fafafa;
+
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.qty-control button:hover {
+  background: #f1eee9;
+}
+
+.qty-control span {
+  width: 45px;
+
+  text-align: center;
+
+  font-weight: 700;
+}
+
+/* =========================
+   MODAL BUTTONS
+========================= */
+
+.modal-right .primary {
+  border: none;
+
+  background: var(--primary);
+  color: #fff;
+
+  padding: 12px 18px;
+
+  border-radius: 8px;
+
+  font-weight: 700;
+
+  transition: background 0.2s ease;
+}
+
+.modal-right .primary:hover {
+  background: var(--accent);
+}
+
+.modal-right button:not(.primary) {
+  border: 1px solid #ddd;
+
+  background: #fff;
+
+  color: #555;
+
+  padding: 11px 17px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+.modal-right button:not(.primary):hover {
+  background: #f8f8f8;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.site-footer {
+  padding: 25px 24px;
+
+  border-top: 1px solid #eee;
+
+  text-align: center;
+
+  color: #666;
+
+  font-size: 0.9rem;
+
+  background: #fff;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .hero-right {
+    height: 260px;
+  }
+
+  .products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+  .container {
+    padding: 12px 14px 40px;
+  }
+
+  .site-header {
+    padding: 14px 16px;
+  }
+
+  .site-nav {
+    gap: 10px;
+  }
+
+  .hero {
+    padding: 22px;
+    border-radius: 14px;
+  }
+
+  .hero-left h1 {
+    font-size: 31px;
+  }
+
+  .hero-left .lead {
+    font-size: 14px;
+  }
+
+  .hero-right {
+    height: 210px;
+  }
+
+  .restaurant-header h1 {
+    font-size: 24px;
+  }
+
+  .products {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .menu-section-title {
+    font-size: 20px;
+  }
+
+  .product-modal {
+    grid-template-columns: 1fr;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .modal-left {
+    min-height: 230px;
+    height: 230px;
+  }
+
+  .modal-left img {
+    min-height: 230px;
+    height: 230px;
+  }
+
+  .modal-right {
+    padding: 22px;
+  }
+
+  .modal-right h3 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero-left h1 {
+    font-size: 27px;
+  }
+
+  .chips {
+    gap: 6px;
+  }
+
+  .chip {
+    font-size: 11px;
+    padding: 6px 9px;
+  }
+
+  .products {
+    grid-template-columns: 1fr;
+  }
+}
