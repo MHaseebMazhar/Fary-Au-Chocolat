@@ -5,10 +5,8 @@ export default function Navbar({
   brand = "Fary Au Chocolat",
   cartCount = 0,
   onCartClick,
-  onSearch,
   logoSrc = "/logo.jpg",
 }) {
-  const [q, setQ] = useState("");
   const [lang, setLang] = useState("EN");
   const [imgError, setImgError] = useState(false);
 
