@@ -16,12 +16,20 @@ import LocationModal from "../../components/LocationModal/LocationModal";
 const PRODUCT_IMAGES = [
   // 1-8 Kunafa Cups
   "https://images.deliveryhero.io/image/global-menu-service/FP_PK/vendor/w45o/product/103008037/6e9b9951-b970-4d2d-bf63-a77fa81382ba.jpg?width=128&height=128",
-  "https://images.deliveryhero.io/image/global-menu-service/FP_PK/vendor/w45o/product/103008038/5d867e81-1c43-43de-bc9a-1ddbe2abbff1.jpg?width=128&height=128",
+
+  // PRODUCT 2 - CORRECT URL
+  "https://images.deliveryhero.io/image/global-menu-service/FP_PK/vendor/w45o/product/103008038/5d867e81-1c13-43de-bc9a-1ddbe2abbff1.jpg?width=128&height=128",
+
   "https://images.deliveryhero.io/image/global-menu-service/FP_PK/vendor/w45o/product/103008040/be903b62-b03d-4b2f-aab6-a019238267a8.jpg?width=150&height=150",
+
   "https://images.deliveryhero.io/image/global-menu-service/FP_PK/vendor/w45o/product/103008041/c2e5ed6c-ca6b-47da-9fe1-3305a68903ef.jpg?width=150&height=150",
+
   "https://images.deliveryhero.io/image/global-menu-service/FP_PK/vendor/w45o/product/103008032/18a93868-eb55-4508-9e3f-03ba8e0c69c6.jpg?width=150&height=150",
+
   "https://images.deliveryhero.io/image/global-menu-service/FP_PK/vendor/w45o/product/103008033/2cee9708-e05f-4d51-9b0f-579e5c357ecc.jpg?width=150&height=150",
+
   "https://images.deliveryhero.io/image/global-menu-service/FP_PK/vendor/w45o/product/103008035/7f12163e-901a-465a-8c9f-a174e7686790.jpg?width=150&height=150",
+
   "https://images.deliveryhero.io/image/global-menu-service/FP_PK/vendor/w45o/product/103008036/4856b8c4-2ea2-4543-b0ae-9b3c86b5aaff.jpg?width=150&height=150",
 
   // 9 onwards
@@ -88,6 +96,7 @@ const PRODUCTS = [
     price: 1399,
     desc: "Delicious mixture of fresh banana fruit with drizzled pistachio paste, rich chocolate and crispy kunafa creating a perfect blend of textures and flavors",
     category: "Kunafa Cups",
+    image: "/be903b62-b03d-4b2f-aab6-a019238267a8.webp",
   },
   {
     id: 3,
